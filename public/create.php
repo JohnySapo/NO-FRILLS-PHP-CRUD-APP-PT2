@@ -5,10 +5,44 @@
     Module: Web Application
     Lecturer: Robert Smith
  -->
+ <!-- CREATE PHP File -->
 
- <!-- Create PHP File -->
+<?php 
+    if(isset($_POST['submit'])) {
+        require "common.php";
+        
+        try {
+            require_once "src/DBconnect.php";
+            
+            $new_user = array(
+                "firstname" =>  escape($_POST['firstname']),
+                "lastname"  =>  escape($_POST['lastname']),
+                "email"     =>  escape($_POST['email']),
+                "age"       =>  escape($_POST['age']),
+                "location"  =>  escape($_POST['location'])
+            );
 
-<?php include "templates/header.php"; ?>
+            $sql = sprintf( "INSERT INTO %s (%s) values (%s)", "users", implode(", ",
+            array_keys($new_user)), ":" . implode(", :", array_keys($new_user)) );
+
+            $statement = $connection -> prepare ($sql);
+            $statement -> execute($new_user);
+
+        } catch(PDOException $error) {
+            echo $sql . "<br>" . $error -> getMessage();
+        }
+    }
+?>
+
+<?php    
+    include "templates/header.php"; 
+
+    if(isset($_POST['submit']) && $statement) {
+        echo $new_user['firstname']. ' sucessfully added';
+    }
+?>
+
+<!-- HTML WEBPAGE -->
 
 <div class="form-control p-5">
     <form method="POST" class="row">
@@ -23,10 +57,11 @@
         <input type="text" name="age" id="age" class="form-control mt-2" />
         <label for="location" class="">Location</label>
         <input type="text" name="location" id="location" class="form-control mt-2" />
-        <input type="submit" name="" id="submit" value="Submit" class="btn form-control mt-2 btn-primary" />
+        <input type="submit" name="submit" id="submit" value="Submit" class="btn form-control mt-2 btn-primary" />
         
     </form>
 </div>
 
-<a href="index.php" class="text-black-50">Back Home</a>
+<a href="index.php" class="text-black-50 text-decoration-none">Back Home</a>
+
 <?php include "templates/footer.php"; ?>

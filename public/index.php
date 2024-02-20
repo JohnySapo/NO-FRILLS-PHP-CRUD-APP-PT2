@@ -5,21 +5,43 @@
     Module: Web Application
     Lecturer: Robert Smith
  -->
- <!-- Index PHP File -->
+ <!-- INDEX PHP File -->
 
 <?php include "templates/header.php"; ?>
 
-<ul class="row m-4 text-center list-unstyled">
-    <!-- Add User -->
-    <div class="col">
-        <li class="fs-5"><a href="#" class=" text-uppercase text-black-50 text-decoration-none"><strong>Create</strong></a></li>
+<nav class="navbar bg-light rounded-4">
+    <div class="container-fluid justify-content-center navbar-expand">
+        <ul class="navbar-nav text-center px-2">
+            <!-- Add User -->
+            <li class="nav-item px-2">
+                <a href="create.php" class="nav-link text-uppercase">
+                    <strong class="">Create</strong>
+                    <br><small class="w-100">add a user</small>
+                </a>
+            </li>
+            <!-- Find a User -->
+            <li class="nav-item px-2">
+                <a href="read.php" class="nav-link text-uppercase">
+                    <strong>Read</strong>
+                    <br><small class="w-100">find a user</small>
+                </a>
+                </li>
+            <!-- Update a User -->
+            <li class="nav-item px-2">
+                <a href="update.php" class="nav-link text-uppercase">
+                    <strong>Update</strong>
+                    <br><small class="w-100">edit a user</small>
+                </a>
+            </li>
+            <!-- Delete a User -->
+            <li class="nav-item px-2">
+                <a href="delete.php" class="nav-link text-uppercase">
+                    <strong>Delete</strong>
+                    <br><small class="w-100">delete a user</small>
+                </a>
+            </li>
+        </ul>
     </div>
-    <!-- Find a User -->
-    <div class="col">
-        <li class="fs-5"><a href="#" class=" text-uppercase text-black-50 text-decoration-none"><strong>Read</strong></a></li>
-    </div>
-</ul>
+</div>
 
-<?php include "create.php"; ?>
-<?php include "read.php"; ?>
 <?php include "templates/footer.php"; ?>
